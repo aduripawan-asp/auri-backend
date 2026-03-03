@@ -8,12 +8,19 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://auri-frontend-steel.vercel.app",
+  methods: ["GET", "POST"],
+  credentials: true
+}));
 app.use(express.json());
 
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: { origin: "*" }
+  cors: {
+    origin: "https://auri-frontend-steel.vercel.app",
+    methods: ["GET", "POST"]
+  }
 });
 
 mongoose.connect(process.env.MONGO_URI)
