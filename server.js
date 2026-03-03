@@ -9,18 +9,18 @@ const jwt = require("jsonwebtoken");
 
 const app = express();
 app.use(cors({
-  origin: "https://auri-frontend-steel.vercel.app",
-  methods: ["GET", "POST"],
-  credentials: true
+  origin: "*",
+  methods: ["GET", "POST"]
 }));
 app.use(express.json());
 
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://auri-frontend-steel.vercel.app",
+    origin: "*",
     methods: ["GET", "POST"]
-  }
+  },
+  transports: ["websocket"]
 });
 
 mongoose.connect(process.env.MONGO_URI)
